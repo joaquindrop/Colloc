@@ -269,6 +269,9 @@ function writeIOSFiles($files, $destPath)
 
     $CatPath        = "ca.lproj";
     $EnglishPath    = "en.lproj";
+    $EnglishUKPath    = "en-GB.lproj";
+    $EnglishAUPath    = "en-AU.lproj";
+    $EnglishUSPath    = "en-US.lproj";
     $SpanishPath    = "es.lproj";
     $GermanPath     = "de.lproj";
     $GreekPath     = "el.lproj";
@@ -298,6 +301,18 @@ function writeIOSFiles($files, $destPath)
         else if ($languageName == "English")
         {
             $directory = $EnglishPath;
+        }
+        else if ($languageName == "EnglishUK")
+        {
+            $directory = $EnglishUKPath;
+        }
+        else if ($languageName == "EnglishAU")
+        {
+            $directory = $EnglishAUPath;
+        }
+        else if ($languageName == "EnglishUS")
+        {
+            $directory = $EnglishUSPath;
         }
         else if ($languageName == "Spanish")
         {
@@ -477,6 +492,9 @@ function convertLanguageToISO639($language)
 
     $languages[ 'Catalan' ]    = "ca";
     $languages[ 'English' ]    = "en";
+    $languages[ 'EnglishUK' ]    = "en-gb";
+    $languages[ 'EnglishAU' ]    = "en-au";
+    $languages[ 'EnglishUS' ]    = "en-us";
     $languages[ 'Spanish' ]    = "es";
     $languages[ 'German' ]     = "de";
     $languages[ 'Greek' ]      = "el";
