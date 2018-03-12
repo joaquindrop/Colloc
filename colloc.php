@@ -427,7 +427,7 @@ function writeAndroidFiles($files, $destPath)
             continue;
         }
         $filenameLanguageCode = $languageCode == "en" ? "" : "-" . $languageCode;
-        $filename             = $androidPath . $filenameLanguageCode . "/strings.xml";
+        $filename             = $androidPath . $filenameLanguageCode . "/ext_strings.xml";
         echo("ANDR - Trying to Write:\n" . $filename . "\n");
         createPathIfDoesntExists($filename);
         $fh = fopen($filename, "w");
