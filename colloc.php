@@ -492,9 +492,9 @@ function convertLanguageToISO639($language)
 
     $languages[ 'Catalan' ]    = "ca";
     $languages[ 'English' ]    = "en";
-    $languages[ 'EnglishUK' ]    = "en-gb";
-    $languages[ 'EnglishAU' ]    = "en-au";
-    $languages[ 'EnglishUS' ]    = "en-us";
+    $languages[ 'EnglishUK' ]    = "en-rGB";
+    $languages[ 'EnglishAU' ]    = "en-rAU";
+    $languages[ 'EnglishUS' ]    = "en-rUS";
     $languages[ 'Spanish' ]    = "es";
     $languages[ 'German' ]     = "de";
     $languages[ 'Greek' ]      = "el";
