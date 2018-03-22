@@ -236,8 +236,9 @@ function androidLineParse($key, $localizedString)
     $localizedString = str_replace(">", "&gt;", $localizedString);
 
     // Add more rules here.
-
-    return "\t<string name=\"" . str_replace(".", "_", $key) . "\">" . $localizedString . "</string>";
+    $key = str_replace(".", "_", $key);
+    
+    return "\t<string name=\"ext_" . $key . "\">" . $localizedString . "</string>";
 }
 
 function resetOccurencesCounter()
