@@ -88,6 +88,11 @@ $localizationFileLines = explode("\n", $localizationFileLines);
 
 $iOSFiles     = [ ];
 $androidFiles = [ ];
+$inputLanguages = [ ];
+
+if ($argc > 4) {
+    $inputLanguages = array_slice($argv, 4);
+}
 
 if (count($localizationFileLines) > 0)
 {
@@ -143,8 +148,8 @@ if (count($localizationFileLines) > 0)
                     $androidParsedLine = androidLineParse($key, $value);
 
                     $languageName = $languages[ $languageIndex ];
-
-                    if ($languageName != '#')
+                    // here we can check if there's a list of languages then check if the selected language is in the list
+                    if ($languageName != '#' && (sizeof($inputLanguages) == 0 || in_array($languageName, $inputLanguages)))
                     {
                         $iOSFiles[ $languageName ][]                                 = $iOSParsedLine;
                         $androidFiles[ $languageName ][]                             = $androidParsedLine;
@@ -236,8 +241,9 @@ function androidLineParse($key, $localizedString)
     $localizedString = str_replace(">", "&gt;", $localizedString);
 
     // Add more rules here.
+    $key = str_replace(".", "_", $key);
 
-    return "\t<string name=\"" . $key . "\">" . $localizedString . "</string>";
+    return "\t<string name=\"ext_" . $key . "\">" . $localizedString . "</string>";
 }
 
 function resetOccurencesCounter()
@@ -427,7 +433,7 @@ function writeAndroidFiles($files, $destPath)
             continue;
         }
         $filenameLanguageCode = $languageCode == "en" ? "" : "-" . $languageCode;
-        $filename             = $androidPath . $filenameLanguageCode . "/strings.xml";
+        $filename             = $androidPath . $filenameLanguageCode . "/ext_strings.xml";
         echo("ANDR - Trying to Write:\n" . $filename . "\n");
         createPathIfDoesntExists($filename);
         $fh = fopen($filename, "w");
@@ -513,7 +519,7 @@ function convertLanguageToISO639($language)
 
     if (isset($languages[ $language ]))
     {
-        echo "\nLANG: " . $language . "[" . $languages[ $language ] . "]";
+        // echo "\nLANG: " . $language . "[" . $languages[ $language ] . "]";
 
         return $languages[ $language ];
     }
