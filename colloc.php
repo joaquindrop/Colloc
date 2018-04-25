@@ -32,6 +32,14 @@ function file_get_contents_utf8($fn)
     return mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
 }
 
+$supportedLanguages = array('Catalan', 'English', 'EnglishUK', 
+    'EnglishAU', 'EnglishCA', 'EnglishUS', 
+    'Spanish', 'German', 'Greek', 'French', 
+    'FrenchCA', 'Italian', 'Portuguese', 
+    'Dutch', 'Swedish', 'Arabic', 'Polish', 
+    'Russian', 'Turkish', 'Chinese', 
+    'Japanese');
+
 $url = $argv[ 1 ];
 echo("\nURL: " . $argv[ 1 ]);
 
@@ -90,8 +98,15 @@ $iOSFiles     = [ ];
 $androidFiles = [ ];
 $inputLanguages = [ ];
 
-if ($argc > 4) {
+if ($argc > 4) 
+{
     $inputLanguages = array_slice($argv, 4);
+    // check if the input doesn't contain supported languages
+    foreach ($inputLanguages as $language) {
+        if (!in_array($language, $supportedLanguages)) {
+            die("\n" . 'The language ' . $language . ' is not supported' . "\n\n");
+        }
+    }
 }
 
 if (count($localizationFileLines) > 0)
@@ -148,7 +163,7 @@ if (count($localizationFileLines) > 0)
                     $androidParsedLine = androidLineParse($key, $value);
 
                     $languageName = $languages[ $languageIndex ];
-                    // here we can check if there's a list of languages then check if the selected language is in the list
+
                     if ($languageName != '#' && (sizeof($inputLanguages) == 0 || in_array($languageName, $inputLanguages)))
                     {
                         $iOSFiles[ $languageName ][]                                 = $iOSParsedLine;
@@ -277,18 +292,19 @@ function writeIOSFiles($files, $destPath)
     $EnglishPath    = "en.lproj";
     $EnglishUKPath    = "en-GB.lproj";
     $EnglishAUPath    = "en-AU.lproj";
+    $EnglishCAPath    = "en-CA.lproj";
     $EnglishUSPath    = "en-US.lproj";
     $SpanishPath    = "es.lproj";
     $GermanPath     = "de.lproj";
     $GreekPath     = "el.lproj";
     $FrenchPath     = "fr.lproj";
+    $FrenchCAPath     = "fr-CA.lproj";
     $ItalianPath    = "it.lproj";
     $PortuguesePath = "pt.lproj";
     $DutchPath      = "nl.lproj";
     $SwedishPath    = "sv.lproj";
     $ArabicPath     = "ar.lproj";
     $PolandPath     = "pl.lproj";
-    $PortuguesePath = "pt.lproj";
     $RussianPath    = "ru.lproj";
     $TurkishPath    = "tr.lproj";
     $ChinesePath    = "zh.lproj";
@@ -316,6 +332,10 @@ function writeIOSFiles($files, $destPath)
         {
             $directory = $EnglishAUPath;
         }
+        else if ($languageName == "EnglishCA")
+        {
+            $directory = $EnglishCAPath;
+        }
         else if ($languageName == "EnglishUS")
         {
             $directory = $EnglishUSPath;
@@ -335,6 +355,10 @@ function writeIOSFiles($files, $destPath)
         else if ($languageName == "French")
         {
             $directory = $FrenchPath;
+        }
+        else if ($languageName == "FrenchCA")
+        {
+            $directory = $FrenchCAPath;
         }
         else if ($languageName == "Italian")
         {
@@ -359,10 +383,6 @@ function writeIOSFiles($files, $destPath)
         else if ($languageName == "Polish")
         {
             $directory = $PolandPath;
-        }
-        else if ($languageName == "Portuguese")
-        {
-            $directory = $PortuguesePath;
         }
         else if ($languageName == "Russian")
         {
@@ -500,18 +520,19 @@ function convertLanguageToISO639($language)
     $languages[ 'English' ]    = "en";
     $languages[ 'EnglishUK' ]    = "en-rGB";
     $languages[ 'EnglishAU' ]    = "en-rAU";
+    $languages[ 'EnglishCA' ]    = "en-rCA";
     $languages[ 'EnglishUS' ]    = "en-rUS";
     $languages[ 'Spanish' ]    = "es";
     $languages[ 'German' ]     = "de";
     $languages[ 'Greek' ]      = "el";
     $languages[ 'French' ]     = "fr";
+    $languages[ 'FrenchCA' ]     = "fr-rCA";
     $languages[ 'Italian' ]    = "it";
     $languages[ 'Portuguese' ] = "pt";
     $languages[ 'Dutch' ]      = "nl";
     $languages[ 'Swedish' ]    = "sv";
     $languages[ 'Arabic' ]     = "ar";
     $languages[ 'Polish' ]     = "pl";
-    $languages[ 'Portuguese' ] = "pt";
     $languages[ 'Russian' ]    = "ru";
     $languages[ 'Turkish' ]    = "tr";
     $languages[ 'Chinese' ]    = "zh";
