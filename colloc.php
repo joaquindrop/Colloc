@@ -32,13 +32,13 @@ function file_get_contents_utf8($fn)
     return mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
 }
 
-$supportedLanguages = array('Catalan', 'English', 'EnglishUK', 
-    'EnglishAU', 'EnglishCA', 'EnglishUS', 
-    'Spanish', 'German', 'Greek', 'French', 
-    'FrenchCA', 'Italian', 'Portuguese', 
-    'Dutch', 'Swedish', 'Arabic', 'Polish', 
-    'Russian', 'Turkish', 'Chinese', 
-    'Japanese');
+$supportedLanguages = array('ca', 'en', 'en-GB', 
+    'en-AU', 'en-CA', 'en-US', 
+    'es', 'de', 'el', 'fr', 
+    'fr-CA', 'it', 'pt', 
+    'nl', 'sv', 'ar', 'pl', 
+    'ru', 'tr', 'zh', 
+    'jp');
 
 $url = $argv[ 1 ];
 echo("\nURL: " . $argv[ 1 ]);
@@ -290,7 +290,7 @@ function writeIOSFiles($files, $destPath)
 
     $CatPath        = "ca.lproj";
     $EnglishPath    = "en.lproj";
-    $EnglishUKPath    = "en-GB.lproj";
+    $EnglishGBPath    = "en-GB.lproj";
     $EnglishAUPath    = "en-AU.lproj";
     $EnglishCAPath    = "en-CA.lproj";
     $EnglishUSPath    = "en-US.lproj";
@@ -316,87 +316,87 @@ function writeIOSFiles($files, $destPath)
 
         echo("\nIn language: " . $languageName);
 
-        if (strcmp($languageName, "Catalan") == 0)
+        if (strcmp($languageName, "ca") == 0)
         {
             $directory = $CatPath;
         }
-        else if ($languageName == "English")
+        else if ($languageName == "en")
         {
             $directory = $EnglishPath;
         }
-        else if ($languageName == "EnglishUK")
+        else if ($languageName == "en-GB")
         {
-            $directory = $EnglishUKPath;
+            $directory = $EnglishGBPath;
         }
-        else if ($languageName == "EnglishAU")
+        else if ($languageName == "en-AU")
         {
             $directory = $EnglishAUPath;
         }
-        else if ($languageName == "EnglishCA")
+        else if ($languageName == "en-CA")
         {
             $directory = $EnglishCAPath;
         }
-        else if ($languageName == "EnglishUS")
+        else if ($languageName == "en-US")
         {
             $directory = $EnglishUSPath;
         }
-        else if ($languageName == "Spanish")
+        else if ($languageName == "es")
         {
             $directory = $SpanishPath;
         }
-        else if ($languageName == "German")
+        else if ($languageName == "de")
         {
             $directory = $GermanPath;
         }
-        else if ($languageName == "Greek")
+        else if ($languageName == "el")
         {
             $directory = $GreekPath;
         }
-        else if ($languageName == "French")
+        else if ($languageName == "fr")
         {
             $directory = $FrenchPath;
         }
-        else if ($languageName == "FrenchCA")
+        else if ($languageName == "fr-CA")
         {
             $directory = $FrenchCAPath;
         }
-        else if ($languageName == "Italian")
+        else if ($languageName == "it")
         {
             $directory = $ItalianPath;
         }
-        else if ($languageName == "Portuguese")
+        else if ($languageName == "pt")
         {
             $directory = $PortuguesePath;
         }
-        else if ($languageName == "Dutch")
+        else if ($languageName == "nl")
         {
             $directory = $DutchPath;
         }
-        else if ($languageName == "Swedish")
+        else if ($languageName == "sv")
         {
             $directory = $SwedishPath;
         }
-        else if ($languageName == "Arabic")
+        else if ($languageName == "ar")
         {
             $directory = $ArabicPath;
         }
-        else if ($languageName == "Polish")
+        else if ($languageName == "pl")
         {
             $directory = $PolandPath;
         }
-        else if ($languageName == "Russian")
+        else if ($languageName == "ru")
         {
             $directory = $RussianPath;
         }
-        else if ($languageName == "Turkish")
+        else if ($languageName == "tr")
         {
             $directory = $TurkishPath;
         }
-        else if ($languageName == "Chinese")
+        else if ($languageName == "zh")
         {
             $directory = $ChinesePath;
         }
-        else if ($languageName == "Japanese")
+        else if ($languageName == "jp")
         {
             $directory = $JapanesePath;
         }
@@ -516,27 +516,27 @@ function createPathIfDoesntExists($filename)
 function convertLanguageToISO639($language)
 {
 
-    $languages[ 'Catalan' ]    = "ca";
-    $languages[ 'English' ]    = "en";
-    $languages[ 'EnglishUK' ]    = "en-rGB";
-    $languages[ 'EnglishAU' ]    = "en-rAU";
-    $languages[ 'EnglishCA' ]    = "en-rCA";
-    $languages[ 'EnglishUS' ]    = "en-rUS";
-    $languages[ 'Spanish' ]    = "es";
-    $languages[ 'German' ]     = "de";
-    $languages[ 'Greek' ]      = "el";
-    $languages[ 'French' ]     = "fr";
-    $languages[ 'FrenchCA' ]     = "fr-rCA";
-    $languages[ 'Italian' ]    = "it";
-    $languages[ 'Portuguese' ] = "pt";
-    $languages[ 'Dutch' ]      = "nl";
-    $languages[ 'Swedish' ]    = "sv";
-    $languages[ 'Arabic' ]     = "ar";
-    $languages[ 'Polish' ]     = "pl";
-    $languages[ 'Russian' ]    = "ru";
-    $languages[ 'Turkish' ]    = "tr";
-    $languages[ 'Chinese' ]    = "zh";
-    $languages[ 'Japanese' ]   = "ja";
+    $languages[ 'ca' ]    = "ca";
+    $languages[ 'en' ]    = "en";
+    $languages[ 'en-GB' ]    = "en-rGB";
+    $languages[ 'en-AU' ]    = "en-rAU";
+    $languages[ 'en-CA' ]    = "en-rCA";
+    $languages[ 'en-US' ]    = "en-rUS";
+    $languages[ 'es' ]    = "es";
+    $languages[ 'de' ]     = "de";
+    $languages[ 'el' ]      = "el";
+    $languages[ 'fr' ]     = "fr";
+    $languages[ 'fr-CA' ]     = "fr-rCA";
+    $languages[ 'it' ]    = "it";
+    $languages[ 'pt' ] = "pt";
+    $languages[ 'nl' ]      = "nl";
+    $languages[ 'sv' ]    = "sv";
+    $languages[ 'ar' ]     = "ar";
+    $languages[ 'pl' ]     = "pl";
+    $languages[ 'ru' ]    = "ru";
+    $languages[ 'tr' ]    = "tr";
+    $languages[ 'zh' ]    = "zh";
+    $languages[ 'ja' ]   = "ja";
 
     if (isset($languages[ $language ]))
     {
